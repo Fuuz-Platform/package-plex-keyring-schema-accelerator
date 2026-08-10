@@ -1,0 +1,582 @@
+{
+  "packageDefinition": {
+    "name": "Plex Keyring Schema"
+  },
+  "packageDefinitionVersion": {
+    "id": "plexKeyringSchema-0-0-1",
+    "version": "0.0.1",
+    "packageDefinitionId": "plexKeyringSchema",
+    "exportedFileId": null
+  },
+  "packageDefinitionSelections": [
+    {
+      "id": "plexKeyringSchema-sel-dm",
+      "api": "application",
+      "modelName": "DataModel",
+      "selected": [
+        {
+          "id": "plexAccountsPayableInvoice"
+        },
+        {
+          "id": "plexAccountsPayablePayment"
+        },
+        {
+          "id": "plexAccountsReceivableDeposit"
+        },
+        {
+          "id": "plexAccountsReceivableInvoice"
+        },
+        {
+          "id": "plexActiveContainer"
+        },
+        {
+          "id": "plexActivity"
+        },
+        {
+          "id": "plexAddress"
+        },
+        {
+          "id": "plexApprovedEquipment"
+        },
+        {
+          "id": "plexApprovedSupplier"
+        },
+        {
+          "id": "plexApprovedSupplierAlt"
+        },
+        {
+          "id": "plexApprovedSupplierEdi"
+        },
+        {
+          "id": "plexApprovedSupplierMrp"
+        },
+        {
+          "id": "plexApprovedWorkcenter"
+        },
+        {
+          "id": "plexAssetData"
+        },
+        {
+          "id": "plexAssetRequest"
+        },
+        {
+          "id": "plexAssetStatus"
+        },
+        {
+          "id": "plexAttachmentGroupsResponseRow"
+        },
+        {
+          "id": "plexAttachmentsResponseRow"
+        },
+        {
+          "id": "plexBatch"
+        },
+        {
+          "id": "plexBatchProgress"
+        },
+        {
+          "id": "plexBomComponent"
+        },
+        {
+          "id": "plexBuilding"
+        },
+        {
+          "id": "plexChartOfAccount"
+        },
+        {
+          "id": "plexChecksheet"
+        },
+        {
+          "id": "plexContact"
+        },
+        {
+          "id": "plexContainer"
+        },
+        {
+          "id": "plexContainerAdjustment"
+        },
+        {
+          "id": "plexContainerLocationMoves"
+        },
+        {
+          "id": "plexContainerShippingDetails"
+        },
+        {
+          "id": "plexCostSubType"
+        },
+        {
+          "id": "plexCustomer"
+        },
+        {
+          "id": "plexCustomerAddress"
+        },
+        {
+          "id": "plexCustomerAddressEdi"
+        },
+        {
+          "id": "plexCustomerFinancials"
+        },
+        {
+          "id": "plexCustomerPart"
+        },
+        {
+          "id": "plexCustomObject"
+        },
+        {
+          "id": "plexCustomObjectFieldDefinition"
+        },
+        {
+          "id": "plexCustomObjectRecord"
+        },
+        {
+          "id": "plexDataSet"
+        },
+        {
+          "id": "plexDescription"
+        },
+        {
+          "id": "plexDimension"
+        },
+        {
+          "id": "plexDocument"
+        },
+        {
+          "id": "plexDynamicMultiOutSet"
+        },
+        {
+          "id": "plexDynamicMultiOutTemplate"
+        },
+        {
+          "id": "plexDynamicMultiOutTemplatePartOperation"
+        },
+        {
+          "id": "plexElapsedTimeAsset"
+        },
+        {
+          "id": "plexElapsedTimeTag"
+        },
+        {
+          "id": "plexEmployee"
+        },
+        {
+          "id": "plexEquipment"
+        },
+        {
+          "id": "plexEquipmentAttribute"
+        },
+        {
+          "id": "plexEquipmentType"
+        },
+        {
+          "id": "plexEvent"
+        },
+        {
+          "id": "plexFieldDefinition"
+        },
+        {
+          "id": "plexFieldType"
+        },
+        {
+          "id": "plexFinancials"
+        },
+        {
+          "id": "plexFiscalPeriodStatus"
+        },
+        {
+          "id": "plexGeneralLedgerActivityAPInvoice"
+        },
+        {
+          "id": "plexGeneralLedgerActivityAPPayment"
+        },
+        {
+          "id": "plexGeneralLedgerActivityARDeposit"
+        },
+        {
+          "id": "plexGeneralLedgerActivityARInvoice"
+        },
+        {
+          "id": "plexGeneralLedgerActivityJournal"
+        },
+        {
+          "id": "plexGetChecksheetTypeResponse"
+        },
+        {
+          "id": "plexGetControlPlanLineResponse"
+        },
+        {
+          "id": "plexGetControlPlanResponse"
+        },
+        {
+          "id": "plexGetControlPlanTypeResponse"
+        },
+        {
+          "id": "plexGetDeviationResponse"
+        },
+        {
+          "id": "plexGetDeviationStatusResponse"
+        },
+        {
+          "id": "plexGetMasterUnit"
+        },
+        {
+          "id": "plexGetProcessControlPlanLineResponse"
+        },
+        {
+          "id": "plexGetProcessControlPlanResponse"
+        },
+        {
+          "id": "plexGetSamplePlanResponse"
+        },
+        {
+          "id": "plexInventoryPart"
+        },
+        {
+          "id": "plexInventoryShipment"
+        },
+        {
+          "id": "plexItemAdjustment"
+        },
+        {
+          "id": "plexItemSupplier"
+        },
+        {
+          "id": "plexItemSupplierPrice"
+        },
+        {
+          "id": "plexJob"
+        },
+        {
+          "id": "plexJobOperation"
+        },
+        {
+          "id": "plexJobType"
+        },
+        {
+          "id": "plexJournal"
+        },
+        {
+          "id": "plexJournalEntry"
+        },
+        {
+          "id": "plexJournalLine"
+        },
+        {
+          "id": "plexKit"
+        },
+        {
+          "id": "plexKitRecommendation"
+        },
+        {
+          "id": "plexKitRecommendationBom"
+        },
+        {
+          "id": "plexLaborHistory"
+        },
+        {
+          "id": "plexLatestTagData"
+        },
+        {
+          "id": "plexLine"
+        },
+        {
+          "id": "plexLineContainer"
+        },
+        {
+          "id": "plexLineItem"
+        },
+        {
+          "id": "plexLineRelease"
+        },
+        {
+          "id": "plexListActivitiesResponse"
+        },
+        {
+          "id": "plexListInspectionModesResponse"
+        },
+        {
+          "id": "plexListToleranceTypesResponse"
+        },
+        {
+          "id": "plexLoadedSourceInventory"
+        },
+        {
+          "id": "plexLoadErrorType"
+        },
+        {
+          "id": "plexLocation"
+        },
+        {
+          "id": "plexLog"
+        },
+        {
+          "id": "plexLogicAppsWorkflowRun"
+        },
+        {
+          "id": "plexLogStatus"
+        },
+        {
+          "id": "plexLot"
+        },
+        {
+          "id": "plexMailbox"
+        },
+        {
+          "id": "plexMasterUnitDetails"
+        },
+        {
+          "id": "plexMeasure"
+        },
+        {
+          "id": "plexMetric"
+        },
+        {
+          "id": "plexMetricBenchmark"
+        },
+        {
+          "id": "plexMetricData"
+        },
+        {
+          "id": "plexNote"
+        },
+        {
+          "id": "plexOperatingParameter"
+        },
+        {
+          "id": "plexOperatingParameterGroup"
+        },
+        {
+          "id": "plexOperation"
+        },
+        {
+          "id": "plexOrderLinePrice"
+        },
+        {
+          "id": "plexOrderLinePriceAdjustments"
+        },
+        {
+          "id": "plexOrderLines"
+        },
+        {
+          "id": "plexOrderLineShipTos"
+        },
+        {
+          "id": "plexOrderPriceAdjustments"
+        },
+        {
+          "id": "plexOrders"
+        },
+        {
+          "id": "plexPart"
+        },
+        {
+          "id": "plexPartOperation"
+        },
+        {
+          "id": "plexPartShippingDetails"
+        },
+        {
+          "id": "plexPoPrice"
+        },
+        {
+          "id": "plexPrice"
+        },
+        {
+          "id": "plexPriceAdjustment"
+        },
+        {
+          "id": "plexProcessControlRecipe"
+        },
+        {
+          "id": "plexProcessControlRecipeFamily"
+        },
+        {
+          "id": "plexProcessControlRecipeFamilyTypeResponse"
+        },
+        {
+          "id": "plexProcessGroupResponse"
+        },
+        {
+          "id": "plexProcessSpecification"
+        },
+        {
+          "id": "plexProcessStepChecksheetResponse"
+        },
+        {
+          "id": "plexProcessStepInstallBomResponse"
+        },
+        {
+          "id": "plexProcessStepResponse"
+        },
+        {
+          "id": "plexProcessStepsReportResponse"
+        },
+        {
+          "id": "plexProcessStepToolComponentResponse"
+        },
+        {
+          "id": "plexProcessStepValidateComponentResponse"
+        },
+        {
+          "id": "plexProduction"
+        },
+        {
+          "id": "plexProductionHistory"
+        },
+        {
+          "id": "plexProductionHistorySummary"
+        },
+        {
+          "id": "plexProductionLine"
+        },
+        {
+          "id": "plexProductionLineWorkcenter"
+        },
+        {
+          "id": "plexPurchaseOrder"
+        },
+        {
+          "id": "plexPurchaseOrderStatus"
+        },
+        {
+          "id": "plexPurchaseOrderType"
+        },
+        {
+          "id": "plexPurchasingDefaults"
+        },
+        {
+          "id": "plexRack"
+        },
+        {
+          "id": "plexReceipt"
+        },
+        {
+          "id": "plexReceiptAlt"
+        },
+        {
+          "id": "plexReceiptLot"
+        },
+        {
+          "id": "plexRelease"
+        },
+        {
+          "id": "plexReleaseEdi"
+        },
+        {
+          "id": "plexReleaseStatus"
+        },
+        {
+          "id": "plexRequiredSourceInventory"
+        },
+        {
+          "id": "plexSanitizationCode"
+        },
+        {
+          "id": "plexScheduling"
+        },
+        {
+          "id": "plexScrapHistory"
+        },
+        {
+          "id": "plexScrapHistorySummary"
+        },
+        {
+          "id": "plexScrapReason"
+        },
+        {
+          "id": "plexShippableContainer"
+        },
+        {
+          "id": "plexShipper"
+        },
+        {
+          "id": "plexSpecification"
+        },
+        {
+          "id": "plexSpecificationType"
+        },
+        {
+          "id": "plexStandardObject"
+        },
+        {
+          "id": "plexStorage"
+        },
+        {
+          "id": "plexSubcontractReceipt"
+        },
+        {
+          "id": "plexSupplier"
+        },
+        {
+          "id": "plexSupplierReturn"
+        },
+        {
+          "id": "plexSupplyItem"
+        },
+        {
+          "id": "plexSupplyItemAlt"
+        },
+        {
+          "id": "plexTankEvent"
+        },
+        {
+          "id": "plexTenant"
+        },
+        {
+          "id": "plexTimeClockEntries"
+        },
+        {
+          "id": "plexTransferOrder"
+        },
+        {
+          "id": "plexTransformedDataType"
+        },
+        {
+          "id": "plexTrialBalance"
+        },
+        {
+          "id": "plexTruck"
+        },
+        {
+          "id": "plexUnit"
+        },
+        {
+          "id": "plexUserAccount"
+        },
+        {
+          "id": "plexWorkcenter"
+        },
+        {
+          "id": "plexWorkcenterEvent"
+        },
+        {
+          "id": "plexWorkcenterSetup"
+        },
+        {
+          "id": "plexWorkcenterSetupEntry"
+        },
+        {
+          "id": "plexWorkcenterStatus"
+        },
+        {
+          "id": "plexWorkcenterStatusHistory"
+        }
+      ],
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "name"
+        },
+        {
+          "name": "description"
+        },
+        {
+          "name": "dataModelKindId"
+        }
+      ],
+      "metadata": {},
+      "packageDefinitionVersionId": "plexKeyringSchema-0-0-1"
+    }
+  ]
+}

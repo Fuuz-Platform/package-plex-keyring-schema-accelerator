@@ -1,5 +1,10 @@
 {
   "name": "Plex Keyring Schema",
   "version": "0.0.1",
-  "dependencies": {}
+  "applicationPublisherId": null,
+  "enterpriseId": null,
+  "environmentId": null,
+  "dependencies": {},
+  "specVersion": "2.0.0",
+  "platformVersion": "2026.8.0"
 }

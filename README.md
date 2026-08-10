@@ -1,6 +1,6 @@
 # package-plex-keyring-schema-accelerator
 
-**Version:** 0.0.1
+**Version:** 0.0.1 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
 **Dictionary:** Plex developer portal, 2026-08-05
 
 ---
@@ -20,12 +20,17 @@ Models only. Connections, flows and the endpoint switchboard are separate concer
 ## Package Contents
 
 ```
-plex-keyring-schema/
-├── manifest.json
-├── package-data.json
-├── preinstall/     182 steps (uniqueness verification, one per model)
-└── install/        911 steps (headers and versions, then relations)
+plex-keyring-schema-0.0.1.tgz    <- import this
+  ├── manifest.json        name, version, spec + platform version
+  ├── definition.json      the PackageDefinition / Version / Selections
+  └── package-data.json    182 dataModels (header, version, modelDefinition, migrations)
 ```
+
+The same three files are also committed unpacked, so the schema is readable and diffable in the
+browser without downloading anything.
+
+This is the layout `exportPackageArchive` produces — declarative model definitions, not a script of
+create-and-deploy steps. Install order, relation ordering and deployment are the installer's concern.
 
 ---
 
@@ -58,6 +63,18 @@ By category: masterOrTransactional 99, subResource 63, analytics 19, configurati
 
 ---
 
+## One tenant per PCN
+
+**Install this once per Plex PCN, into its own Fuuz tenant.** The keyring is not designed for one
+tenant to read several PCNs: two facilities both have a `PART-1000`, and sharing a keyspace
+collapses them onto one row with no error and nothing in the data to show it happened. A tenant per
+PCN makes that impossible by construction rather than by convention.
+
+The PCN and source system are therefore tenant configuration, not request parameters — the read
+flows refuse to run until both are set.
+
+---
+
 ## Three design decisions worth knowing
 
 **Every field is nullable.** A vendor's `required` flag describes their *write* contract, not what
@@ -66,10 +83,9 @@ fields. One NOT NULL on a field a given tenant does not populate fails the whole
 takes the other 499 rows with it. Only `id` is required, because the keyring computes it.
 
 **A foreign key is three columns, not one.** Plex sends `partId` holding *their* key, while the
-model's primary key is namespaced (`<sourceSystem>:<externalId>`) so two Plex instances feeding one
-tenant cannot collide. Each reference therefore keeps the vendor's value as a String, adds a
-computed `partRefId: ID`, and hangs the relation off that. Applications get `row.part { … }`, and
-the raw vendor value is still there for tracing.
+model's primary key is namespaced (`<sourceSystem>:<externalId>`). Each reference therefore keeps
+the vendor's value as a String, adds a computed `partRefId: ID`, and hangs the relation off that.
+Applications get `row.part { … }`, and the raw vendor value is still there for tracing.
 
 **References with nothing behind them stay plain.** Heat number, currency code, DUNS and tracking
 number look like foreign keys and are not — Plex exposes no endpoint for them. Inventing a model to
@@ -87,25 +103,13 @@ recognises. **Create the `ExternalSystem` row before loading data**, or every in
 
 ---
 
-## Install order
-
-Two passes, and pass 1 deliberately carries **no relations at all**.
-
-A reverse collection needs its child model to exist; a child's forward relation needs its parent. No
-single ordering satisfies both. Pass 1 therefore depends on nothing — the FK columns land carrying
-no constraint — and pass 2 raises every model to a second version with its relations once all
-182 exist. Install order cannot be wrong.
-
----
-
 ## Regenerating
 
-The package is generated, never hand-edited:
+Generated, never hand-edited:
 
 ```sh
 node platform/gen-models.js plex     # vendor dictionary -> models
 node platform/gen-package.js         # models -> this package
 ```
 
-The scraped Plex dictionary is deliberately **not** shipped here. A package carries the derived Fuuz
-model definitions — our own artifacts — not a redistribution of the vendor's API schemas.
+The scraped Plex dictionary is deliberately **not** shipped here.
