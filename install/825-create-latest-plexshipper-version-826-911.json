@@ -1,0 +1,1900 @@
+{
+  "action": {
+    "up": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'CreatePayloadInput!]!){data:create' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"create\":$}]}}).data.id",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    },
+    "down": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'DeletePayloadInput!]!){delete' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"where\":{\"id\":id}}]}})",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    }
+  },
+  "payload": [
+    {
+      "id": "plexShipper-v2",
+      "number": "1.3.1",
+      "dataModelId": "plexShipper",
+      "modelDefinition": {
+        "name": "PlexShipper",
+        "kind": "reference",
+        "description": "Vendor-shaped projection of ShipperDto from /shipping/v1/customer-shippers. Generated from the PLEX dictionary 2026-08-05, not hand-written. Read-only evidence: every field is nullable because a vendor's required flag describes their write contract, not what their read endpoint returns. Harmonization happens in the hub tenant.",
+        "metadata": {
+          "mfgx": {
+            "module": {
+              "id": "plexKeyring",
+              "group": {
+                "id": "aceKeyring"
+              }
+            },
+            "exposed": true,
+            "mutable": true,
+            "mutations": {
+              "create": true,
+              "update": true,
+              "del": true
+            },
+            "dataChangeCapture": {
+              "exposed": true,
+              "retentionDays": 120
+            },
+            "customFields": {
+              "exposed": true
+            },
+            "labelField": "externalId",
+            "indices": [
+              {
+                "name": "source",
+                "unique": false,
+                "fields": [
+                  "sourceSystemId",
+                  "externalId"
+                ]
+              }
+            ]
+          },
+          "mongo": {
+            "collection": "plexShipper"
+          },
+          "graphql": {
+            "type": "Object"
+          }
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "ID!",
+            "description": "Primary id (== dedupeKey). Ours, not the vendor's.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": true
+            }
+          },
+          {
+            "name": "shipperNumber",
+            "type": "String",
+            "description": "The shipper number associated with a given shipment.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "customerId",
+            "type": "String",
+            "description": "The ID of the customer that is associated with the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "customerAddressId",
+            "type": "String",
+            "description": "The ID of the customer address that is associated with the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipDate",
+            "type": "DateTime",
+            "description": "The date on which the shipper was shipped.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shippedById",
+            "type": "String",
+            "description": "The ID of the user who shipped the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "carrierId",
+            "type": "String",
+            "description": "The supplier ID that is flagged as the carrier on the shipment.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "freightTerms",
+            "type": "String",
+            "description": "Terms of the freight payment; for example, COD, Collect, or Prepaid.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "status",
+            "type": "String",
+            "description": "The status of the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "trackingNumber",
+            "type": "String",
+            "description": "The tracking number, often provided by a carrier, related to a specific shipment.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "trailerNumber",
+            "type": "String",
+            "description": "The trailer number associated with the physical trailer that a specific shipment was shipped on.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "note",
+            "type": "String",
+            "description": "An internal note on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "scheduledShipDate",
+            "type": "DateTime",
+            "description": "The date on which the shipper is scheduled to ship.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdById",
+            "type": "String",
+            "description": "The ID of the user who created the record.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdDate",
+            "type": "DateTime",
+            "description": "The date on which the record was created.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedById",
+            "type": "String",
+            "description": "The ID of the user who last modified the record.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedDate",
+            "type": "DateTime",
+            "description": "The date on which the record was last modified.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipperNote",
+            "type": "String",
+            "description": "A note to print on the shipper and the bill of lading (BOL).",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "truckId",
+            "type": "String",
+            "description": "The ID of the truck associated with the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "expediteNote",
+            "type": "String",
+            "description": "Notes related to expedited shipping.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "expediteReason",
+            "type": "String",
+            "description": "The reason for expedited shipping as specified on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "expediteDepartment",
+            "type": "String",
+            "description": "The department that authorized or required an expedited shipment.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "expediteAuthorizedById",
+            "type": "String",
+            "description": "The ID of the user who authorized the expedited shipping.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "expediteAdditionalCost",
+            "type": "Float",
+            "description": "Additional cost due to expedited shipping.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipFromCode",
+            "type": "String",
+            "description": "The building code from which the shipper was shipped.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "truckArrivalTime",
+            "type": "DateTime",
+            "description": "This field has been deprecated. Use TruckArrivalTimeOfDay.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "printedById",
+            "type": "String",
+            "description": "The ID of the user who printed the record.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "printedDate",
+            "type": "DateTime",
+            "description": "The date on which the record was printed.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "freightAmount",
+            "type": "Float",
+            "description": "Freight amount is the freight cost associated with the shipment.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "bolNote",
+            "type": "String",
+            "description": "The bill of lading (BOL) note on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "customsExporter",
+            "type": "String",
+            "description": "The customs exporter specified on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "deliveryDateTime",
+            "type": "DateTime",
+            "description": "The delivery date on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dropshipSupplierCode",
+            "type": "String",
+            "description": "The dropship supplier code.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dropshipSupplierId",
+            "type": "String",
+            "description": "The dropship supplier ID.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipperChargeAmount",
+            "type": "Float",
+            "description": "The charge amount specified on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "masterBolNo",
+            "type": "String",
+            "description": "The master bill of lading (BOL) number.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "pallets",
+            "type": "Int",
+            "description": "The number of pallets on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "premiumTransAuth",
+            "type": "String",
+            "description": "The number specified in the shipper's Premium Trans Auth field (used for AETC numbers on expedited shipments).",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "truckConfirmation",
+            "type": "String",
+            "description": "The truck confirmation number.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "truckCalledDate",
+            "type": "Date",
+            "description": "The truck called date. Use format YYYY-MM-DD.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "grossWeightOverride",
+            "type": "Float",
+            "description": "The gross weight override.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "mrn",
+            "type": "String",
+            "description": "The Movement Reference Number (MRN) specified on the shipper.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "mrnDate",
+            "type": "Date",
+            "description": "The movement reference number (MRN) date. Use format YYYY-MM-DD.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "mrnType",
+            "type": "String",
+            "description": "The movement reference number (MRN) type.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "routingAuthorizationNumber",
+            "type": "String",
+            "description": "The routing authorization number.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipperWeight",
+            "type": "Float",
+            "description": "The shipper weight.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "pickListPrintedDateTime",
+            "type": "DateTime",
+            "description": "The date on which the pick list was printed.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "truckArrivalTimeOfDay",
+            "type": "String",
+            "description": "The truck arrival time. Use format hh:mm:ss.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "externalId",
+            "type": "String",
+            "description": "Native key in the source system. Half of the upsert key, so a re-extract overwrites rather than duplicates.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceSystemId",
+            "type": "ID",
+            "description": "FK to ExternalSystem — WHICH instance of this ERP said so. Two sites running the same vendor are two systems, and their keys collide by construction.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceSystem",
+            "type": "ExternalSystem",
+            "description": "The registered source system this row came from. A REAL relation, not a bare id: it makes `row.sourceSystem { name }` traversable and makes the platform reject a source system that does not exist — which is the difference between catching a mistyped system on the first row and discovering it after a million rows have landed under a name nobody recognises.\n\n     One-way by design. ExternalSystem is a platform/ACE model this generator does not own, so it gets no reverse collection — and a collection of several thousand vendor models hanging off one registry row would be unusable anyway.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "sourceSystemId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceUrl",
+            "type": "String",
+            "description": "Collection endpoint this row was read from, so a suspect field can be traced to the contract that produced it.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceVersion",
+            "type": "String",
+            "description": "Dictionary stamp this model was generated from. A vendor schema change shows up here before it shows up as a bug.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "syncedAt",
+            "type": "DateTime",
+            "description": "When this row was last read from the source.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "rawPayload",
+            "type": "JSON",
+            "description": "The verbatim vendor record. Stays in the SPOKE tenant — feature bundles cross to the hub, raw payloads never do.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dedupeKey",
+            "type": "String",
+            "description": "sourceSystemId:externalId — the idempotency key.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipperAccountsPayableInvoices",
+            "type": "[PlexAccountsPayableInvoice!]!",
+            "description": "The PlexAccountsPayableInvoice rows referencing this record via shipperNo.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "shipperRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipperAccountsReceivableInvoices",
+            "type": "[PlexAccountsReceivableInvoice!]!",
+            "description": "The PlexAccountsReceivableInvoice rows referencing this record via shipperNo.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "shipperRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "customerRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexCustomer, computed by the data mapping as sourceSystemId + \":\" + customerId. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "customer",
+            "type": "PlexCustomer",
+            "description": "The PlexCustomer this row references, via customerId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "customerRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "customerAddressRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexCustomerAddress, computed by the data mapping as sourceSystemId + \":\" + customerAddressId. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "customerAddress",
+            "type": "PlexCustomerAddress",
+            "description": "The PlexCustomerAddress this row references, via customerAddressId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "customerAddressRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdByRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexUserAccount, computed by the data mapping as sourceSystemId + \":\" + createdById. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdBy",
+            "type": "PlexUserAccount",
+            "description": "The PlexUserAccount this row references, via createdById.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "createdByRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedByRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexUserAccount, computed by the data mapping as sourceSystemId + \":\" + modifiedById. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedBy",
+            "type": "PlexUserAccount",
+            "description": "The PlexUserAccount this row references, via modifiedById.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "modifiedByRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "truckRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexTruck, computed by the data mapping as sourceSystemId + \":\" + truckId. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "truck",
+            "type": "PlexTruck",
+            "description": "The PlexTruck this row references, via truckId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "truckRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipFromRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexAddress, computed by the data mapping as sourceSystemId + \":\" + shipFromCode. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipFrom",
+            "type": "PlexAddress",
+            "description": "The PlexAddress this row references, via shipFromCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "shipFromRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dropshipSupplierRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexSupplier, computed by the data mapping as sourceSystemId + \":\" + dropshipSupplierCode. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dropshipSupplier",
+            "type": "PlexSupplier",
+            "description": "The PlexSupplier this row references, via dropshipSupplierCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "dropshipSupplierRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "shipperShippableContainers",
+            "type": "[PlexShippableContainer!]!",
+            "description": "The PlexShippableContainer rows referencing this record via shipperId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "shipperRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "description": "Create Latest PlexShipper Version (826/911)"
+}

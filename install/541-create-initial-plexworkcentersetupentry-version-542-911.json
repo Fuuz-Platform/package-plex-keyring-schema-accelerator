@@ -1,0 +1,986 @@
+{
+  "action": {
+    "up": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'CreatePayloadInput!]!){data:create' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"create\":$}]}}).data.id",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    },
+    "down": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'DeletePayloadInput!]!){delete' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"where\":{\"id\":id}}]}})",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    }
+  },
+  "payload": [
+    {
+      "id": "plexWorkcenterSetupEntry-v1",
+      "number": "1.3.0",
+      "dataModelId": "plexWorkcenterSetupEntry",
+      "modelDefinition": {
+        "name": "PlexWorkcenterSetupEntry",
+        "kind": "reference",
+        "description": "Vendor-shaped projection of WorkcenterSetupEntry from /production/v1/production-history/workcenter-setup-entries. Generated from the PLEX dictionary 2026-08-05, not hand-written. Read-only evidence: every field is nullable because a vendor's required flag describes their write contract, not what their read endpoint returns. Harmonization happens in the hub tenant.",
+        "metadata": {
+          "mfgx": {
+            "module": {
+              "id": "plexKeyring",
+              "group": {
+                "id": "aceKeyring"
+              }
+            },
+            "exposed": true,
+            "mutable": true,
+            "mutations": {
+              "create": true,
+              "update": true,
+              "del": true
+            },
+            "dataChangeCapture": {
+              "exposed": true,
+              "retentionDays": 120
+            },
+            "customFields": {
+              "exposed": true
+            },
+            "labelField": "externalId",
+            "indices": [
+              {
+                "name": "source",
+                "unique": false,
+                "fields": [
+                  "sourceSystemId",
+                  "externalId"
+                ]
+              }
+            ]
+          },
+          "mongo": {
+            "collection": "plexWorkcenterSetupEntry"
+          },
+          "graphql": {
+            "type": "Object"
+          }
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "ID!",
+            "description": "Primary id (== dedupeKey). Ours, not the vendor's.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": true
+            }
+          },
+          {
+            "name": "workcenterCode",
+            "type": "String",
+            "description": "Gets or sets the workcenterCode of the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "setupDateTime",
+            "type": "DateTime",
+            "description": "Gets or sets the date and time when the Setup was provisioned in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "setupDateTimeChange",
+            "type": "DateTime",
+            "description": "Gets or sets the date and time when the Setup was updated/deleted in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartId",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Id (UUID) within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartNumber",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartRevision",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Revision within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartNumberRevision",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Revision Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartOperationId",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Operation id within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartOperationCode",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Operation code within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartOperationNumber",
+            "type": "Int",
+            "description": "Gets or sets the parent Part's Operation Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartJobId",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Job id within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartJobNumber",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Job Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartJobOperationId",
+            "type": "String",
+            "description": "Gets or sets the parent Part's Job operation id within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parentPartJobOperationNumber",
+            "type": "Float",
+            "description": "Gets or sets the parent Part's Job operation number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartId",
+            "type": "String",
+            "description": "Gets or sets the child Part's Id (UUID) within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartNumber",
+            "type": "String",
+            "description": "Gets or sets the child Part's Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartRevision",
+            "type": "String",
+            "description": "Gets or sets the child Part's Revision within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartNumberRevision",
+            "type": "String",
+            "description": "Gets or sets the child Part's Revision Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartOperationId",
+            "type": "String",
+            "description": "Gets or sets the child Part's Operation id within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartOperationCode",
+            "type": "String",
+            "description": "Gets or sets the child Part's Operation code within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartOperationNumber",
+            "type": "Int",
+            "description": "Gets or sets the child Part's Operation Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartJobId",
+            "type": "String",
+            "description": "Gets or sets the child Part's Job id within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartJobNumber",
+            "type": "String",
+            "description": "Gets or sets the child Part's Job Number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartJobOperationId",
+            "type": "String",
+            "description": "Gets or sets the child Part's Job operation id within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "childPartJobOperationNumber",
+            "type": "Float",
+            "description": "Gets or sets the child Part's Job operation number within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dynamicMultiOut",
+            "type": "Boolean",
+            "description": "Gets or sets whether the performed Job is Dynamic MultiOut job within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "traditionalMultiOut",
+            "type": "Boolean",
+            "description": "Gets or sets whether the performed Job is Traditional MultiOut job within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "parent",
+            "type": "Boolean",
+            "description": "Gets or sets whether the part in question is a Parent part within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "companion",
+            "type": "Boolean",
+            "description": "Gets or sets whether the part in question is a Companion part within a Setup in the WorkCenter that was running jobs for the requested query",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "externalId",
+            "type": "String",
+            "description": "Native key in the source system. Half of the upsert key, so a re-extract overwrites rather than duplicates.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceSystemId",
+            "type": "ID",
+            "description": "FK to ExternalSystem — WHICH instance of this ERP said so. Two sites running the same vendor are two systems, and their keys collide by construction.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceUrl",
+            "type": "String",
+            "description": "Collection endpoint this row was read from, so a suspect field can be traced to the contract that produced it.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceVersion",
+            "type": "String",
+            "description": "Dictionary stamp this model was generated from. A vendor schema change shows up here before it shows up as a bug.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "syncedAt",
+            "type": "DateTime",
+            "description": "When this row was last read from the source.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "rawPayload",
+            "type": "JSON",
+            "description": "The verbatim vendor record. Stays in the SPOKE tenant — feature bundles cross to the hub, raw payloads never do.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dedupeKey",
+            "type": "String",
+            "description": "sourceSystemId:externalId — the idempotency key.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexWorkcenter, computed by the data mapping as sourceSystemId + \":\" + workcenterCode. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "description": "Create Initial PlexWorkcenterSetupEntry Version (542/911)"
+}

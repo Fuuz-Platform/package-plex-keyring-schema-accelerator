@@ -1,0 +1,10 @@
+{
+  "models": 182,
+  "fields": 4936,
+  "forwardRelations": 496,
+  "reverseRelations": 314,
+  "preinstallSteps": 182,
+  "installSteps": 911,
+  "dictionaryStamp": "2026-08-05",
+  "packageVersion": "0.0.1"
+}

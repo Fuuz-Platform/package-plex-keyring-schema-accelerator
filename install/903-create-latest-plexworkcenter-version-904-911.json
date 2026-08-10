@@ -1,0 +1,1007 @@
+{
+  "action": {
+    "up": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'CreatePayloadInput!]!){data:create' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"create\":$}]}}).data.id",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    },
+    "down": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'DeletePayloadInput!]!){delete' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"where\":{\"id\":id}}]}})",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    }
+  },
+  "payload": [
+    {
+      "id": "plexWorkcenter-v2",
+      "number": "1.3.1",
+      "dataModelId": "plexWorkcenter",
+      "modelDefinition": {
+        "name": "PlexWorkcenter",
+        "kind": "reference",
+        "description": "Vendor-shaped projection of Workcenter from /production/v1/production-definitions/workcenters. Generated from the PLEX dictionary 2026-08-05, not hand-written. Read-only evidence: every field is nullable because a vendor's required flag describes their write contract, not what their read endpoint returns. Harmonization happens in the hub tenant.",
+        "metadata": {
+          "mfgx": {
+            "module": {
+              "id": "plexKeyring",
+              "group": {
+                "id": "aceKeyring"
+              }
+            },
+            "exposed": true,
+            "mutable": true,
+            "mutations": {
+              "create": true,
+              "update": true,
+              "del": true
+            },
+            "dataChangeCapture": {
+              "exposed": true,
+              "retentionDays": 120
+            },
+            "customFields": {
+              "exposed": true
+            },
+            "labelField": "name",
+            "indices": [
+              {
+                "name": "source",
+                "unique": false,
+                "fields": [
+                  "sourceSystemId",
+                  "externalId"
+                ]
+              }
+            ]
+          },
+          "mongo": {
+            "collection": "plexWorkcenter"
+          },
+          "graphql": {
+            "type": "Object"
+          }
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "ID!",
+            "description": "Primary id (== dedupeKey). Ours, not the vendor's.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": true
+            }
+          },
+          {
+            "name": "workcenterCode",
+            "type": "String",
+            "description": "50 characters max. A short name associated to the workcenterID, and a unique code to reference the workcenter. This code shows up throughout the system, primarily on the Control Panel.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "name",
+            "type": "String",
+            "description": "100 characters max. The full name associated to the workcenterID that is a more descriptive name for the Workcenter. Depending on your settings, this name can also display on the control panel and sequence board.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterType",
+            "type": "String",
+            "description": "50 characters max. Setup table &quot;Workcenter Type&quot; (part.dbo.workcenter_type). Grouping of similar workcenters. The Workcenter Type influences how the workcenter behaves, but is also available as a filter in different places (control panel, production status, Workcenter log, sequence board).",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterGroup",
+            "type": "String",
+            "description": "50 characters max. Setup table &quot;Workcenter Group&quot; (part.dbo.workcenter_group). An optional grouping of similar workcenters. This is helpful when there are many workcenters that can be chosen from the Control Panel. If the Workcenter Group setting is on, the Control Panel will display the Workcenter Groups then once a group is chosen, the list of workcenters only in that group will display.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "buildingId",
+            "type": "String",
+            "description": "UUID of the building the workcenter is located in.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "buildingCode",
+            "type": "String",
+            "description": "50 characters max. A short name for the building.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "tankSilo",
+            "type": "Boolean",
+            "description": "Boolean flag to indicate whether the workcenter is a Tank/Silo.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "productionLineId",
+            "type": "String",
+            "description": "The unique identifier for the production line associated with the workcenter.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "ipAddress",
+            "type": "String",
+            "description": "The IP Address of the workcenter.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "plcName",
+            "type": "String",
+            "description": "The PLC Name of the workcenter.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "externalId",
+            "type": "String",
+            "description": "Native key in the source system. Half of the upsert key, so a re-extract overwrites rather than duplicates.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceSystemId",
+            "type": "ID",
+            "description": "FK to ExternalSystem — WHICH instance of this ERP said so. Two sites running the same vendor are two systems, and their keys collide by construction.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceSystem",
+            "type": "ExternalSystem",
+            "description": "The registered source system this row came from. A REAL relation, not a bare id: it makes `row.sourceSystem { name }` traversable and makes the platform reject a source system that does not exist — which is the difference between catching a mistyped system on the first row and discovering it after a million rows have landed under a name nobody recognises.\n\n     One-way by design. ExternalSystem is a platform/ACE model this generator does not own, so it gets no reverse collection — and a collection of several thousand vendor models hanging off one registry row would be unusable anyway.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "sourceSystemId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceUrl",
+            "type": "String",
+            "description": "Collection endpoint this row was read from, so a suspect field can be traced to the contract that produced it.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceVersion",
+            "type": "String",
+            "description": "Dictionary stamp this model was generated from. A vendor schema change shows up here before it shows up as a bug.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "syncedAt",
+            "type": "DateTime",
+            "description": "When this row was last read from the source.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "rawPayload",
+            "type": "JSON",
+            "description": "The verbatim vendor record. Stays in the SPOKE tenant — feature bundles cross to the hub, raw payloads never do.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dedupeKey",
+            "type": "String",
+            "description": "sourceSystemId:externalId — the idempotency key.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterApprovedWorkcenters",
+            "type": "[PlexApprovedWorkcenter!]!",
+            "description": "The PlexApprovedWorkcenter rows referencing this record via workcenterCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterLaborHistorys",
+            "type": "[PlexLaborHistory!]!",
+            "description": "The PlexLaborHistory rows referencing this record via workcenterId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterProductionHistorys",
+            "type": "[PlexProductionHistory!]!",
+            "description": "The PlexProductionHistory rows referencing this record via workcenterCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterProductionHistorySummarys",
+            "type": "[PlexProductionHistorySummary!]!",
+            "description": "The PlexProductionHistorySummary rows referencing this record via workcenterCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterScrapHistorys",
+            "type": "[PlexScrapHistory!]!",
+            "description": "The PlexScrapHistory rows referencing this record via workcenterCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterScrapHistorySummarys",
+            "type": "[PlexScrapHistorySummary!]!",
+            "description": "The PlexScrapHistorySummary rows referencing this record via workcenterId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterWorkcenterSetupEntrys",
+            "type": "[PlexWorkcenterSetupEntry!]!",
+            "description": "The PlexWorkcenterSetupEntry rows referencing this record via workcenterCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterWorkcenterStatusHistorys",
+            "type": "[PlexWorkcenterStatusHistory!]!",
+            "description": "The PlexWorkcenterStatusHistory rows referencing this record via workcenterCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "buildingRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexBuilding, computed by the data mapping as sourceSystemId + \":\" + buildingId. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "building",
+            "type": "PlexBuilding",
+            "description": "The PlexBuilding this row references, via buildingId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "buildingRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "productionLineRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexProductionLine, computed by the data mapping as sourceSystemId + \":\" + productionLineId. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "productionLine",
+            "type": "PlexProductionLine",
+            "description": "The PlexProductionLine this row references, via productionLineId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "productionLineRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterChecksheets",
+            "type": "[PlexChecksheet!]!",
+            "description": "The PlexChecksheet rows referencing this record via workcenterId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterJobOperations",
+            "type": "[PlexJobOperation!]!",
+            "description": "The PlexJobOperation rows referencing this record via workcenterId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterBatchs",
+            "type": "[PlexBatch!]!",
+            "description": "The PlexBatch rows referencing this record via workcenterId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterProductionLineWorkcenters",
+            "type": "[PlexProductionLineWorkcenter!]!",
+            "description": "The PlexProductionLineWorkcenter rows referencing this record via workcenterCode.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "id",
+                    "to": "workcenterRefId"
+                  }
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "description": "Create Latest PlexWorkcenter Version (904/911)"
+}

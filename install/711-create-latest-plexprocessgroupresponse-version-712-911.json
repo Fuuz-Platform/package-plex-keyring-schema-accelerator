@@ -1,0 +1,822 @@
+{
+  "action": {
+    "up": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'CreatePayloadInput!]!){data:create' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"create\":$}]}}).data.id",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    },
+    "down": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'DeletePayloadInput!]!){delete' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"where\":{\"id\":id}}]}})",
+      "bindings": {
+        "api": "application",
+        "type": "DataModelVersion"
+      }
+    }
+  },
+  "payload": [
+    {
+      "id": "plexProcessGroupResponse-v2",
+      "number": "1.3.1",
+      "dataModelId": "plexProcessGroupResponse",
+      "modelDefinition": {
+        "name": "PlexProcessGroupResponse",
+        "kind": "reference",
+        "description": "Vendor-shaped projection of ProcessGroupResponseDto from /work-instructions/v1/process-groups. Generated from the PLEX dictionary 2026-08-05, not hand-written. Read-only evidence: every field is nullable because a vendor's required flag describes their write contract, not what their read endpoint returns. Harmonization happens in the hub tenant.",
+        "metadata": {
+          "mfgx": {
+            "module": {
+              "id": "plexKeyring",
+              "group": {
+                "id": "aceKeyring"
+              }
+            },
+            "exposed": true,
+            "mutable": true,
+            "mutations": {
+              "create": true,
+              "update": true,
+              "del": true
+            },
+            "dataChangeCapture": {
+              "exposed": true,
+              "retentionDays": 120
+            },
+            "customFields": {
+              "exposed": true
+            },
+            "labelField": "description",
+            "indices": [
+              {
+                "name": "source",
+                "unique": false,
+                "fields": [
+                  "sourceSystemId",
+                  "externalId"
+                ]
+              }
+            ]
+          },
+          "mongo": {
+            "collection": "plexProcessGroupResponse"
+          },
+          "graphql": {
+            "type": "Object"
+          }
+        },
+        "fields": [
+          {
+            "name": "id",
+            "type": "ID!",
+            "description": "Primary id (== dedupeKey). Ours, not the vendor's.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": true
+            }
+          },
+          {
+            "name": "description",
+            "type": "String",
+            "description": "The process group instruction title.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "expectedDurationTimeSpan",
+            "type": "String",
+            "description": "The expected time to perform the process step activities.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "instruction",
+            "type": "String",
+            "description": "The work instruction content for the process group.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "active",
+            "type": "Boolean",
+            "description": "A value indicating whether the process group is active.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "instructionObject",
+            "type": "String",
+            "description": "The instruction object type. Possible values: &quot;Part Operation&quot; or &quot;Job Container&quot;.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "partOperationId",
+            "type": "String",
+            "description": "The part operation ID.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "workcenterStatusType",
+            "type": "String",
+            "description": "The workcenter status type based on the process group's specified Associated Timing Status. Possible values: &quot;Production&quot; or &quot;Setup&quot;.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sequenceNo",
+            "type": "Int",
+            "description": "The sequence number.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dependsOnProcessGroupId",
+            "type": "String",
+            "description": "The identifier of the process group that this process group depends on.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "hideUntilDependency",
+            "type": "Boolean",
+            "description": "A value indicating whether to hide the process group instruction until the dependent step is completed.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "controlPanelVisible",
+            "type": "Boolean",
+            "description": "A value indicating whether this process group will be visible on the Control Panel.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdById",
+            "type": "String",
+            "description": "The unique identifier for the user that created the process group.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdDateTime",
+            "type": "DateTime",
+            "description": "The date and time when the process group was created.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedById",
+            "type": "String",
+            "description": "The unique identifier for the user that last modified the process group.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedDateTime",
+            "type": "DateTime",
+            "description": "The date and time when the process group was last modified.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "externalId",
+            "type": "String",
+            "description": "Native key in the source system. Half of the upsert key, so a re-extract overwrites rather than duplicates.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": false
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceSystemId",
+            "type": "ID",
+            "description": "FK to ExternalSystem — WHICH instance of this ERP said so. Two sites running the same vendor are two systems, and their keys collide by construction.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceSystem",
+            "type": "ExternalSystem",
+            "description": "The registered source system this row came from. A REAL relation, not a bare id: it makes `row.sourceSystem { name }` traversable and makes the platform reject a source system that does not exist — which is the difference between catching a mistyped system on the first row and discovering it after a million rows have landed under a name nobody recognises.\n\n     One-way by design. ExternalSystem is a platform/ACE model this generator does not own, so it gets no reverse collection — and a collection of several thousand vendor models hanging off one registry row would be unusable anyway.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "sourceSystemId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceUrl",
+            "type": "String",
+            "description": "Collection endpoint this row was read from, so a suspect field can be traced to the contract that produced it.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "sourceVersion",
+            "type": "String",
+            "description": "Dictionary stamp this model was generated from. A vendor schema change shows up here before it shows up as a bug.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "syncedAt",
+            "type": "DateTime",
+            "description": "When this row was last read from the source.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "rawPayload",
+            "type": "JSON",
+            "description": "The verbatim vendor record. Stays in the SPOKE tenant — feature bundles cross to the hub, raw payloads never do.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "dedupeKey",
+            "type": "String",
+            "description": "sourceSystemId:externalId — the idempotency key.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "partOperationRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexPartOperation, computed by the data mapping as sourceSystemId + \":\" + partOperationId. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "partOperation",
+            "type": "PlexPartOperation",
+            "description": "The PlexPartOperation this row references, via partOperationId.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "partOperationRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdByRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexUserAccount, computed by the data mapping as sourceSystemId + \":\" + createdById. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "createdBy",
+            "type": "PlexUserAccount",
+            "description": "The PlexUserAccount this row references, via createdById.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "createdByRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedByRefId",
+            "type": "ID",
+            "description": "Resolved reference to PlexUserAccount, computed by the data mapping as sourceSystemId + \":\" + modifiedById. Nullable: a row may load before its target, and a null FK is not validated.",
+            "metadata": {
+              "mfgx": {
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          },
+          {
+            "name": "modifiedBy",
+            "type": "PlexUserAccount",
+            "description": "The PlexUserAccount this row references, via modifiedById.",
+            "metadata": {
+              "mfgx": {
+                "relation": {
+                  "fields": {
+                    "from": "modifiedByRefId",
+                    "to": "id"
+                  },
+                  "deletionReferenceBehavior": "prevent"
+                },
+                "mutations": {
+                  "create": {
+                    "include": true
+                  },
+                  "update": {
+                    "include": true
+                  }
+                },
+                "queries": {
+                  "include": true
+                },
+                "where": {
+                  "include": true
+                }
+              },
+              "unique": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "description": "Create Latest PlexProcessGroupResponse Version (712/911)"
+}

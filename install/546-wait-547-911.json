@@ -1,0 +1,14 @@
+{
+  "action": {
+    "up": {
+      "transform": "$wait(60000)",
+      "bindings": {}
+    },
+    "down": {
+      "transform": "$",
+      "bindings": {}
+    }
+  },
+  "payload": {},
+  "description": "Wait (547/911)"
+}

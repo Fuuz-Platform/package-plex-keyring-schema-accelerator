@@ -1,0 +1,27 @@
+{
+  "action": {
+    "up": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'CreatePayloadInput!]!){data:create' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"create\":$}]}}).data.id",
+      "bindings": {
+        "api": "application",
+        "type": "DataModel"
+      }
+    },
+    "down": {
+      "transform": "$mutate({\"api\":$api,\"statement\":'mutation($payload:[' & $type & 'DeletePayloadInput!]!){delete' & $type & '(payload:$payload){id}}',\"variables\":{\"payload\":[$.{\"where\":{\"id\":id}}]}})",
+      "bindings": {
+        "api": "application",
+        "type": "DataModel"
+      }
+    }
+  },
+  "payload": [
+    {
+      "id": "plexProcessStepToolComponentResponse",
+      "name": "PlexProcessStepToolComponentResponse",
+      "description": "Vendor-shaped projection of ProcessStepToolComponentResponseDto from /work-instructions/v1/process-groups/{processGroupId}/process-steps/{processStepId}/tool-component. Generated from the PLEX dictionary 2026-08-05, not hand-written. Read-only evidence: every field is nullable because a vendor's required flag describes their write contract, not what their read endpoint returns. Harmonization happens in the hub tenant.",
+      "dataModelKindId": "reference"
+    }
+  ],
+  "description": "Create PlexProcessStepToolComponentResponse Header (169/911)"
+}

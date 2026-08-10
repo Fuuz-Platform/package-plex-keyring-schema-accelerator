@@ -1,0 +1,22 @@
+{
+  "action": {
+    "transform": "$query({\"api\":$api,\"statement\":'query($where:' & $type & 'WhereInput!){data:' & $lowerFirst($type) & '(where:$where){total}}',\"variables\":{\"where\":{\"_or\":[$fields.{$:{\"_in\":[$lookup($$,$)]}}]}}}).data.total ? $throw(\"Could not verify unique fields for \" & $type & \" records.\")",
+    "bindings": {
+      "api": "application",
+      "type": "DataModel",
+      "fields": [
+        "id",
+        "name"
+      ]
+    }
+  },
+  "payload": [
+    {
+      "id": "plexJobType",
+      "name": "PlexJobType",
+      "description": "",
+      "dataModelKindId": "reference"
+    }
+  ],
+  "description": "Verify PlexJobType Doesn't Already Exist (101/182)"
+}
