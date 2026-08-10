@@ -1,10 +1,10 @@
 {
   "models": 182,
-  "fields": 4936,
+  "fields": 4622,
   "forwardRelations": 496,
   "reverseRelations": 314,
   "dictionaryStamp": "2026-08-05",
-  "packageVersion": "0.0.1",
+  "packageVersion": "0.2.0",
   "specVersion": "2.0.0",
   "platformVersion": "2026.8.0"
 }

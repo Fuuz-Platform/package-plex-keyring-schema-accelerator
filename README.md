@@ -1,6 +1,6 @@
 # package-plex-keyring-schema-accelerator
 
-**Version:** 0.0.1 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
+**Version:** 0.2.0 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
 **Dictionary:** Plex developer portal, 2026-08-05
 
 ---
@@ -8,7 +8,7 @@
 ## Overview
 
 Installs the **complete Plex read surface as Fuuz data models** — 182 models,
-4,936 fields — generated from Plex's own API dictionary rather than hand-written.
+4,622 fields — generated from Plex's own API dictionary rather than hand-written.
 
 This is the schema layer of the Plex keyring: somewhere to land every readable Plex object, with
 foreign keys resolved into real relations so applications traverse rather than join.
@@ -20,7 +20,7 @@ Models only. Connections, flows and the endpoint switchboard are separate concer
 ## Package Contents
 
 ```
-plex-keyring-schema-0.0.1.tgz    <- import this
+plex-keyring-schema-0.2.0.tgz    <- import this
   ├── manifest.json        name, version, spec + platform version
   ├── definition.json      the PackageDefinition / Version / Selections
   └── package-data.json    182 dataModels (header, version, modelDefinition, migrations)
@@ -39,7 +39,7 @@ create-and-deploy steps. Install order, relation ordering and deployment are the
 | | |
 |---|---|
 | models | **182** — one per distinct Plex response schema |
-| fields | **4,936** |
+| fields | **4,622** |
 | forward relations | **496** (child → parent, plus `sourceSystem` on every model) |
 | reverse collections | **314** (parent → children) |
 
@@ -53,13 +53,13 @@ By category: masterOrTransactional 99, subResource 63, analytics 19, configurati
 | Model | Fields | Source endpoint |
 |---|---|---|
 | `plexUserAccount` | 81 | `/mdm/v1/user-accounts` |
-| `plexShipper` | 73 | `/shipping/v1/customer-shippers` |
-| `plexPart` | 72 | `/mdm/v2/parts` |
-| `plexAccountsReceivableInvoice` | 71 | `/accounting/v1/ar-invoices` |
-| `plexAccountsPayableInvoice` | 70 | `/accounting/v1/ap-invoices` |
-| `plexCustomerAddress` | 66 | `/mdm/v1/customers/{customerId}/addresses/{addressId}` |
-| `plexPurchaseOrder` | 63 | `/purchasing/v1/purchase-orders` |
-| `plexCustomer` | 62 | `/mdm/v1/customers` |
+| `plexPart` | 69 | `/mdm/v2/parts` |
+| `plexShipper` | 66 | `/shipping/v1/customer-shippers` |
+| `plexCustomerAddress` | 64 | `/mdm/v1/customers/{customerId}/addresses/{addressId}` |
+| `plexAccountsPayableInvoice` | 63 | `/accounting/v1/ap-invoices` |
+| `plexAccountsReceivableInvoice` | 63 | `/accounting/v1/ar-invoices` |
+| `plexCustomer` | 58 | `/mdm/v1/customers` |
+| `plexPurchaseOrder` | 57 | `/purchasing/v1/purchase-orders` |
 
 ---
 
@@ -75,17 +75,36 @@ flows refuse to run until both are set.
 
 ---
 
+## Two identities per row, and they do different jobs
+
+| | |
+|---|---|
+| `id` | **the platform's cuid.** Not derived from anything Plex sent. |
+| `externalId` | **Plex's own key**, verbatim — `partId`, `orderNo`, whatever they call it. Required, unique. |
+
+`externalId` does three jobs: it is the upsert key (so a re-extract overwrites rather than
+duplicates), it is what every foreign key in the module resolves against, and it is the tie back to
+the record being mirrored. `id` does one: identify the row, forever, regardless of what Plex later
+does to its own numbering.
+
+Keeping them separate is what makes both safe. A primary key derived from vendor data is a natural
+key wearing a primary key's clothes — the day Plex renumbers or re-keys anything, the identity of a
+row that other rows already point at changes underneath them. And a cuid cannot collide across PCNs
+no matter how the tenants are arranged, which a namespaced key only achieves by convention.
+
+---
+
 ## Three design decisions worth knowing
 
 **Every field is nullable.** A vendor's `required` flag describes their *write* contract, not what
 their read endpoint returns — optional modules, permissions and older records all produce absent
 fields. One NOT NULL on a field a given tenant does not populate fails the whole upsert batch and
-takes the other 499 rows with it. Only `id` is required, because the keyring computes it.
+takes the other 499 rows with it. The only exceptions are the two identity columns above — `id`,
+which the platform supplies, and `externalId`, which the mapping does.
 
-**A foreign key is three columns, not one.** Plex sends `partId` holding *their* key, while the
-model's primary key is namespaced (`<sourceSystem>:<externalId>`). Each reference therefore keeps
-the vendor's value as a String, adds a computed `partRefId: ID`, and hangs the relation off that.
-Applications get `row.part { … }`, and the raw vendor value is still there for tracing.
+**A foreign key is the vendor's own column.** Plex sends `partId`; the Part it means is the row
+whose `externalId` is that value. So the relation points `partId → Part.externalId` and nothing is
+computed. Applications get `row.part { … }` and the vendor's key is still right there for tracing.
 
 **References with nothing behind them stay plain.** Heat number, currency code, DUNS and tracking
 number look like foreign keys and are not — Plex exposes no endpoint for them. Inventing a model to
