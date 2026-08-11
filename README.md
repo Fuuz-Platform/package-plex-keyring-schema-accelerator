@@ -1,6 +1,6 @@
 # package-plex-keyring-schema-accelerator
 
-**Version:** 0.2.0 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
+**Version:** 0.3.0 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
 **Dictionary:** Plex developer portal, 2026-08-05
 
 ---
@@ -20,7 +20,7 @@ Models only. Connections, flows and the endpoint switchboard are separate concer
 ## Package Contents
 
 ```
-plex-keyring-schema-0.2.0.tgz    <- import this
+plex-keyring-schema-0.3.0.tgz    <- import this
   ├── manifest.json        name, version, spec + platform version
   ├── definition.json      the PackageDefinition / Version / Selections
   └── package-data.json    182 dataModels (header, version, modelDefinition, migrations)
