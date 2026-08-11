@@ -1,6 +1,6 @@
 # package-plex-keyring-schema-accelerator
 
-**Version:** 0.3.0 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
+**Version:** 0.4.0 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
 **Dictionary:** Plex developer portal, 2026-08-05
 
 ---
@@ -8,7 +8,7 @@
 ## Overview
 
 Installs the **complete Plex read surface as Fuuz data models** — 182 models,
-4,622 fields — generated from Plex's own API dictionary rather than hand-written.
+4,644 fields — generated from Plex's own API dictionary rather than hand-written.
 
 This is the schema layer of the Plex keyring: somewhere to land every readable Plex object, with
 foreign keys resolved into real relations so applications traverse rather than join.
@@ -20,7 +20,7 @@ Models only. Connections, flows and the endpoint switchboard are separate concer
 ## Package Contents
 
 ```
-plex-keyring-schema-0.3.0.tgz    <- import this
+plex-keyring-schema-0.4.0.tgz    <- import this
   ├── manifest.json        name, version, spec + platform version
   ├── definition.json      the PackageDefinition / Version / Selections
   └── package-data.json    182 dataModels (header, version, modelDefinition, migrations)
@@ -39,9 +39,9 @@ create-and-deploy steps. Install order, relation ordering and deployment are the
 | | |
 |---|---|
 | models | **182** — one per distinct Plex response schema |
-| fields | **4,622** |
-| forward relations | **496** (child → parent, plus `sourceSystem` on every model) |
-| reverse collections | **314** (parent → children) |
+| fields | **4,644** |
+| forward relations | **507** (child → parent, plus `sourceSystem` on every model) |
+| reverse collections | **325** (parent → children) |
 
 Coverage: all 119 collection GETs in the portal that resolve to a typed schema, plus the
 63 schemas reachable only through a single-entity GET.
@@ -52,13 +52,13 @@ By category: masterOrTransactional 99, subResource 63, analytics 19, configurati
 
 | Model | Fields | Source endpoint |
 |---|---|---|
-| `plexUserAccount` | 81 | `/mdm/v1/user-accounts` |
+| `plexUserAccount` | 92 | `/mdm/v1/user-accounts` |
 | `plexPart` | 69 | `/mdm/v2/parts` |
-| `plexShipper` | 66 | `/shipping/v1/customer-shippers` |
+| `plexShipper` | 67 | `/shipping/v1/customer-shippers` |
 | `plexCustomerAddress` | 64 | `/mdm/v1/customers/{customerId}/addresses/{addressId}` |
 | `plexAccountsPayableInvoice` | 63 | `/accounting/v1/ap-invoices` |
 | `plexAccountsReceivableInvoice` | 63 | `/accounting/v1/ar-invoices` |
-| `plexCustomer` | 58 | `/mdm/v1/customers` |
+| `plexCustomer` | 60 | `/mdm/v1/customers` |
 | `plexPurchaseOrder` | 57 | `/purchasing/v1/purchase-orders` |
 
 ---
