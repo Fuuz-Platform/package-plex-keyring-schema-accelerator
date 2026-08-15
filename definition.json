@@ -3,8 +3,8 @@
     "name": "Plex Keyring Schema"
   },
   "packageDefinitionVersion": {
-    "id": "plexKeyringSchema-0-5-0",
-    "version": "0.5.0",
+    "id": "plexKeyringSchema-0-6-0",
+    "version": "0.6.0",
     "packageDefinitionId": "plexKeyringSchema",
     "exportedFileId": null
   },
@@ -576,7 +576,7 @@
         }
       ],
       "metadata": {},
-      "packageDefinitionVersionId": "plexKeyringSchema-0-5-0"
+      "packageDefinitionVersionId": "plexKeyringSchema-0-6-0"
     }
   ]
 }

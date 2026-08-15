@@ -1,6 +1,6 @@
 # package-plex-keyring-schema-accelerator
 
-**Version:** 0.5.0 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
+**Version:** 0.6.0 · **Spec:** 2.0.0 · **Platform:** 2026.8.0
 **Dictionary:** Plex developer portal, 2026-08-05
 
 ---
@@ -8,7 +8,7 @@
 ## Overview
 
 Installs the **complete Plex read surface as Fuuz data models** — 182 models,
-4,644 fields — generated from Plex's own API dictionary rather than hand-written.
+4,560 fields — generated from Plex's own API dictionary rather than hand-written.
 
 This is the schema layer of the Plex keyring: somewhere to land every readable Plex object, with
 foreign keys resolved into real relations so applications traverse rather than join.
@@ -20,7 +20,7 @@ Models only. Connections, flows and the endpoint switchboard are separate concer
 ## Package Contents
 
 ```
-plex-keyring-schema-0.5.0.tgz    <- import this
+plex-keyring-schema-0.6.0.tgz    <- import this
   ├── manifest.json        name, version, spec + platform version
   ├── definition.json      the PackageDefinition / Version / Selections
   └── package-data.json    182 dataModels (header, version, modelDefinition, migrations)
@@ -42,9 +42,9 @@ That is a different thing from the order DATA is loaded in, which very much is y
 | | |
 |---|---|
 | models | **182** — one per distinct Plex response schema |
-| fields | **4,644** |
-| forward relations | **507** (child → parent, plus `sourceSystem` on every model) |
-| reverse collections | **325** (parent → children) |
+| fields | **4,560** |
+| forward relations | **465** (child → parent, plus `sourceSystem` on every model) |
+| reverse collections | **283** (parent → children) |
 
 Coverage: all 119 collection GETs in the portal that resolve to a typed schema, plus the
 63 schemas reachable only through a single-entity GET.
@@ -94,7 +94,7 @@ reference resolves when it can and silently returns `null` when it cannot — no
 error on delete, and `deletionReferenceBehavior` ignored. Both behaviours were verified against a
 live tenant, in both directions.
 
-So `id = externalId` is what makes all 507 relations real rather than decorative. It also dedupes
+So `id = externalId` is what makes all 465 relations real rather than decorative. It also dedupes
 the source for free: the primary key is the vendor's identifier, so the same record cannot land
 twice however many times it is read.
 
@@ -135,7 +135,7 @@ write** — and rows go up in batches of 500, so one bad reference fails the bat
 freshness preference any more.
 
 `loadLayer` on each endpoint is computed from the relation graph itself, not from naming
-conventions: a model sits one layer past the deepest parent it references. 10 layers, no cycles
+conventions: a model sits one layer past the deepest parent it references. 7 layers, no cycles
 (checked with Tarjan — a cycle would have no total order and has to announce itself rather than
 silently corrupt the sequence).
 
