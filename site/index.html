@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plex Keyring Schema Package &mdash; Fuuz Accelerator</title>
+<meta name="description" content="Fuuz accelerator: Plex keyring schema — 182 data models covering Plex&#x27;s complete read surface, generated from the vendor API dictionary">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://accelerators.fuuz.com/package-plex-keyring-schema-accelerator/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://accelerators.fuuz.com/package-plex-keyring-schema-accelerator/">
+<meta property="og:site_name" content="Fuuz Accelerators">
+<meta property="og:title" content="Plex Keyring Schema Package &mdash; Fuuz Accelerator">
+<meta property="og:description" content="Fuuz accelerator: Plex keyring schema — 182 data models covering Plex&#x27;s complete read surface, generated from the vendor API dictionary">
+<link rel="icon" href="assets/appicon-violet.svg">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="prose.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Plex Keyring Schema Package",
+  "url": "https://accelerators.fuuz.com/package-plex-keyring-schema-accelerator/",
+  "description": "Fuuz accelerator: Plex keyring schema \u2014 182 data models covering Plex's complete read surface, generated from the vendor API dictionary",
+  "codeRepository": "https://github.com/Fuuz-Platform/package-plex-keyring-schema-accelerator",
+  "applicationCategory": "BusinessApplication",
+  "runtimePlatform": "Fuuz",
+  "author": {
+    "@type": "Organization",
+    "name": "Fuuz",
+    "url": "https://fuuz.com"
+  }
+}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="../"><img src="assets/logo-horizontal-on-midnight.svg" alt="Fuuz"></a>
+    <span class="section">Accelerators</span>
+    <nav><a href="#overview">Overview</a><a href="#package-contents">Package Contents</a><a href="#what-gets-installed">What gets installed</a><a href="https://github.com/Fuuz-Platform/package-plex-keyring-schema-accelerator">GitHub</a></nav>
+  </div>
+</header>
+<main>
+<div class="wrap hero">
+  <p class="eyebrow">Accelerator &middot; Integration package</p>
+  <h1>Plex Keyring Schema <span class="accent">Package</span></h1>
+  <p class="lede">Fuuz accelerator: Plex keyring schema — 182 data models covering Plex&#x27;s complete read surface, generated from the vendor API dictionary</p>
+  <div class="ctas">
+    <a class="cta cta-primary" href="https://github.com/Fuuz-Platform/package-plex-keyring-schema-accelerator">Get the package</a>
+    <a class="cta cta-secondary" href="../">All accelerators</a>
+  </div>
+</div>
+<section>
+  <div class="wrap prose">
+<p><strong>Version:</strong> 0.6.0 · <strong>Spec:</strong> 2.0.0 · <strong>Platform:</strong> 2026.8.0
+<strong>Dictionary:</strong> Plex developer portal, 2026-08-05</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Installs the <strong>complete Plex read surface as Fuuz data models</strong> — 182 models,
+4,560 fields — generated from Plex's own API dictionary rather than hand-written.</p>
+<p>This is the schema layer of the Plex keyring: somewhere to land every readable Plex object, with
+foreign keys resolved into real relations so applications traverse rather than join.</p>
+<p>Models only. Connections, flows and the endpoint switchboard are separate concerns.</p>
+<hr />
+<h2 id="package-contents">Package Contents</h2>
+<pre><code>plex-keyring-schema-0.6.0.tgz    &lt;- import this
+  ├── manifest.json        name, version, spec + platform version
+  ├── definition.json      the PackageDefinition / Version / Selections
+  └── package-data.json    182 dataModels (header, version, modelDefinition, migrations)
+</code></pre>
+<p>The same three files are also committed unpacked, so the schema is readable and diffable in the
+browser without downloading anything.</p>
+<p>This is the layout <code>exportPackageArchive</code> produces — declarative model definitions, not a script of
+create-and-deploy steps, so the order models are <em>installed</em> in is the installer's concern.</p>
+<p>That is a different thing from the order DATA is loaded in, which very much is your concern — see
+<a href="#load-order-is-a-correctness-requirement">Load order</a> below.</p>
+<hr />
+<h2 id="what-gets-installed">What gets installed</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>models</td>
+<td><strong>182</strong> — one per distinct Plex response schema</td>
+</tr>
+<tr>
+<td>fields</td>
+<td><strong>4,560</strong></td>
+</tr>
+<tr>
+<td>forward relations</td>
+<td><strong>465</strong> (child → parent, plus <code>sourceSystem</code> on every model)</td>
+</tr>
+<tr>
+<td>reverse collections</td>
+<td><strong>283</strong> (parent → children)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Coverage: all 119 collection GETs in the portal that resolve to a typed schema, plus the
+63 schemas reachable only through a single-entity GET.</p>
+<p>By category: masterOrTransactional 99, subResource 63, analytics 19, configuration 1.</p>
+<h3>Largest models</h3>
+<p>Vendor fields only — relations and provenance columns excluded, so this reflects how much Plex
+actually returns rather than how well connected the model is.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Vendor fields</th>
+<th>Source endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plexCustomerAddress</code></td>
+<td>50</td>
+<td><code>/mdm/v1/customers/{customerId}/addresses/{addressId}</code></td>
+</tr>
+<tr>
+<td><code>plexAccountsPayableInvoice</code></td>
+<td>47</td>
+<td><code>/accounting/v1/ap-invoices</code></td>
+</tr>
+<tr>
+<td><code>plexShipper</code></td>
+<td>47</td>
+<td><code>/shipping/v1/customer-shippers</code></td>
+</tr>
+<tr>
+<td><code>plexAccountsReceivableInvoice</code></td>
+<td>46</td>
+<td><code>/accounting/v1/ar-invoices</code></td>
+</tr>
+<tr>
+<td><code>plexTruck</code></td>
+<td>39</td>
+<td><code>/shipping/v1/customer-trucks</code></td>
+</tr>
+<tr>
+<td><code>plexPurchaseOrder</code></td>
+<td>38</td>
+<td><code>/purchasing/v1/purchase-orders</code></td>
+</tr>
+<tr>
+<td><code>plexActivity</code></td>
+<td>37</td>
+<td><code>/management/v1/activity-manager/{id}</code></td>
+</tr>
+<tr>
+<td><code>plexContainer</code></td>
+<td>34</td>
+<td><code>/inventory-tracking/v1/containers/{serialNumber}</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="one-tenant-per-pcn">One tenant per PCN</h2>
+<p><strong>Install this once per Plex PCN, into its own Fuuz tenant.</strong> The keyring is not designed for one
+tenant to read several PCNs: two facilities both have a <code>PART-1000</code>, and sharing a keyspace
+collapses them onto one row with no error and nothing in the data to show it happened. A tenant per
+PCN makes that impossible by construction rather than by convention.</p>
+<p>The PCN and source system are therefore tenant configuration, not request parameters — the read
+flows refuse to run until both are set.</p>
+<hr />
+<h2 id="identity-the-primary-key-is-the-vendor-s-key">Identity: the primary key IS the vendor's key</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>externalId</code></td>
+<td><strong>Plex's own key</strong>, verbatim — <code>partId</code>, <code>orderNo</code>, whatever they call it.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><strong>the same value</strong>, copied by a create trigger.</td>
+</tr>
+</tbody>
+</table></div>
+<p>This looks redundant and is the single most load-bearing decision in the package, because <strong>the
+platform enforces a foreign key only when it targets <code>id</code></strong>. Pointed at any other unique column, a
+reference resolves when it can and silently returns <code>null</code> when it cannot — no error on write, no
+error on delete, and <code>deletionReferenceBehavior</code> ignored. Both behaviours were verified against a
+live tenant, in both directions.</p>
+<p>So <code>id = externalId</code> is what makes all 465 relations real rather than decorative. It also dedupes
+the source for free: the primary key is the vendor's identifier, so the same record cannot land
+twice however many times it is read.</p>
+<p>A trigger sets it rather than the loader, so <strong>any</strong> writer gets it right — your own integration
+lands the same key this package's flows would.</p>
+<pre><code>&quot;triggers&quot;: { &quot;create&quot;: &quot;... $isNilOrEmpty($r.id) ? $r~&gt;|$|{\&quot;id\&quot;: $string($r.externalId)}| : $r&quot; }
+</code></pre>
+<p><strong>Install one PCN per tenant.</strong> With the vendor's key as the primary key, two PCNs in one tenant
+would overwrite each other row for row.</p>
+<hr />
+<h2 id="three-design-decisions-worth-knowing">Three design decisions worth knowing</h2>
+<p><strong>Every field is nullable.</strong> A vendor's <code>required</code> flag describes their <em>write</em> contract, not what
+their read endpoint returns — optional modules, permissions and older records all produce absent
+fields. One NOT NULL on a field a given tenant does not populate fails the whole upsert batch and
+takes the other 499 rows with it. The only exceptions are the two identity columns above.</p>
+<p><strong>A foreign key is the vendor's own column.</strong> Plex sends <code>partId</code>; the Part it means is the row whose
+<code>id</code> is that value. The relation points <code>partId → Part.id</code> and nothing is computed. Applications get
+<code>row.part { … }</code>, the vendor's key is still right there for tracing, and a reference to a row that
+does not exist is <strong>rejected on write</strong>.</p>
+<p><strong>References with nothing behind them stay plain.</strong> Heat number, currency code, DUNS and tracking
+number look like foreign keys and are not — Plex exposes no endpoint for them. Inventing a model to
+point at would be a lie, so they remain strings.</p>
+<hr />
+<h2 id="load-order-is-a-correctness-requirement">Load order is a correctness requirement</h2>
+<p>Because foreign keys are enforced, <strong>an endpoint whose parent has not loaded yet is a rejected
+write</strong> — and rows go up in batches of 500, so one bad reference fails the batch. Order is not a
+freshness preference any more.</p>
+<p><code>loadLayer</code> on each endpoint is computed from the relation graph itself, not from naming
+conventions: a model sits one layer past the deepest parent it references. 7 layers, no cycles
+(checked with Tarjan — a cycle would have no total order and has to announce itself rather than
+silently corrupt the sequence).</p>
+<p>Run layers in ascending order, or just run the <code>plexKeyringLoadAll</code> flow, which chains them.</p>
+<hr />
+<h2 id="bounding-a-read-plex-has-no-pagination">Bounding a read — Plex has no pagination</h2>
+<p>Worth knowing before planning a large extract: across 283 scraped contracts and 124 collection
+endpoints, Plex documents <strong>no pagination at all</strong> — no limit/offset, no page number, no cursor, no
+continuation token. <code>_limit</code> appears on two endpoints and <code>$top</code> on one, and both are <em>caps</em> that
+truncate; neither can fetch page two.</p>
+<p>Each endpoint therefore records what it actually supports, in <code>paging.style</code>:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td>158</td>
+<td>no bounding mechanism — the collection arrives as it arrives</td>
+</tr>
+<tr>
+<td><code>window</code></td>
+<td>21</td>
+<td>a created/modified date range. Not pagination, but the only real way to bound a large read, and the basis for incremental sync</td>
+</tr>
+<tr>
+<td><code>cap</code></td>
+<td>3</td>
+<td>a documented truncating parameter</td>
+</tr>
+</tbody>
+</table></div>
+<p>Windows ship <strong>off</strong>: silently narrowing a full extract to a slice makes data look missing rather
+than bounded.</p>
+<hr />
+<h2 id="provenance-on-every-row">Provenance on every row</h2>
+<p><code>externalId</code>, <code>sourceSystemId</code>, <code>sourceUrl</code>, <code>sourceVersion</code>, <code>syncedAt</code>, <code>rawPayload</code>, <code>dedupeKey</code>.</p>
+<p><code>sourceSystemId</code> is a real relation to <code>ExternalSystem</code>, not a bare id — so a mistyped source system
+is rejected on the first row rather than discovered after a million have landed under a name nobody
+recognises. <strong>Create the <code>ExternalSystem</code> row before loading data</strong>, or every insert is refused.</p>
+<hr />
+<h2 id="regenerating">Regenerating</h2>
+<p>Generated, never hand-edited:</p>
+<pre><code class="language-sh">node platform/gen-models.js plex     # vendor dictionary -&gt; models
+node platform/gen-package.js         # models -&gt; this package
+</code></pre>
+<p>The scraped Plex dictionary is deliberately <strong>not</strong> shipped here.</p>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <p>Fuuz&reg; is an Enterprise Industrial Intelligence Platform.
+      <a href="https://accelerators.fuuz.com/">All accelerators</a> &middot;
+      <a href="https://github.com/Fuuz-Platform/package-plex-keyring-schema-accelerator">Source</a> &middot;
+      <a href="https://fuuz.com">fuuz.com</a></p>
+  </div>
+</footer>
+</body>
+</html>
