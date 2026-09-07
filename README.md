@@ -183,3 +183,9 @@ node platform/gen-package.js         # models -> this package
 ```
 
 The scraped Plex dictionary is deliberately **not** shipped here.
+
+## Service levels
+
+No service level agreement applies to anything published here. It becomes a supported
+deliverable only once it has been implemented by a Fuuz services professional or an
+approved Fuuz partner.
