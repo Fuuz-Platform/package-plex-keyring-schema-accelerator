@@ -9,7 +9,7 @@
     ],
     "mainImage": {
       "file": "images/main.png",
-      "alt": "Plex Keyring Schema: Fuuz title card"
+      "alt": "Plex Keyring Schema: Fuuz cover"
     },
     "description": [
       "Installs the complete Plex read surface as Fuuz data models — 182 models, 4,560 fields — generated from Plex's own API dictionary rather than hand-written.",
