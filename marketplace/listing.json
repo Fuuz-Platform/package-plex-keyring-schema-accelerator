@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "visibility": "public",
+  "overview": {
+    "tagline": "Beta. Plex keyring schema — 182 data models covering Plex's complete read surface, generated from the vendor API dictionary",
+    "categories": [
+      "Plex",
+      "ERP"
+    ],
+    "mainImage": {
+      "file": "images/main.png",
+      "alt": "Plex Keyring Schema: Fuuz title card"
+    },
+    "description": [
+      "Installs the complete Plex read surface as Fuuz data models — 182 models, 4,560 fields — generated from Plex's own API dictionary rather than hand-written.",
+      "This is the schema layer of the Plex keyring: somewhere to land every readable Plex object, with foreign keys resolved into real relations so applications traverse rather than join."
+    ],
+    "highlights": [
+      {
+        "title": "Plex's whole read surface",
+        "body": "182 data models and 4,560 fields, generated from Plex's own API dictionary."
+      },
+      {
+        "title": "Real relations",
+        "body": "Foreign keys are resolved into relations, so apps traverse Plex data instead of joining it."
+      },
+      {
+        "title": "Safe load order",
+        "body": "Models are layered by dependency (7 layers), so parent records always load before the records that reference them."
+      }
+    ],
+    "screenshots": []
+  },
+  "pricing": {
+    "model": "free",
+    "detail": "Fuuz accelerators are no cost; you pay only for the Fuuz runtime."
+  },
+  "support": {
+    "email": "sales@fuuz.com",
+    "url": "https://github.com/Fuuz-Platform/package-plex-keyring-schema-accelerator",
+    "sla": "No service level agreement. Supported once implemented by a Fuuz services professional or an approved Fuuz partner.",
+    "phone": ""
+  },
+  "security": {
+    "residency": "In the customer's Fuuz environment",
+    "external": false,
+    "externalDetail": "",
+    "certs": "",
+    "notes": "It reads from Plex into Fuuz; it doesn't write to Plex. Every row records where it came from."
+  },
+  "install": {
+    "prerequisites": [
+      "Fuuz 2026.8.0 or later",
+      "A Fuuz tenant of its own for each Plex PCN: install once per PCN"
+    ],
+    "steps": [
+      {
+        "text": "Set the PCN and source system in the tenant configuration. The read flows don't run until both are set."
+      },
+      {
+        "text": "Load the data in layer order (lowest loadLayer first), or run the plexKeyringLoadAll flow, which chains the layers."
+      }
+    ],
+    "after": ""
+  }
+}
